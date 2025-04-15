@@ -23,10 +23,10 @@ package com;
             System.out.println("2. Login");
             System.out.println("3. Exit");
 
-            int choice = scanner.nextInt();
+            String choice = scanner.nextLine();
             scanner.nextLine();
 
-            switch (choice) {
+            switch (Integer.parseInt(choice)) {
                 case 1:
                     registerUser();
                     break;
@@ -230,9 +230,9 @@ package com;
             System.out.println("2. Purchase Membership");
             System.out.println("3. Logout");
             System.out.print("Enter your choice: ");
-            scanner.nextLine(); 
+            
 
-            String choice = scanner.nextLine();
+           String choice = scanner.nextLine();
 
             switch (choice) {
                 case "1":
@@ -250,12 +250,25 @@ package com;
             }
         }
     private static void purchasemembership(User member) throws SQLException {
-    MemberShip membership = new MemberShip(member.getId(), "Basic Plan", "Active", 50.0, 12);
-    membershipService.purchasemembership(membership);
-    System.out.println("Membership purchased successfully!");
+        System.out.println("Enter membership details:");
+        System.out.print("Membership Type: ");
+        String membershipType = scanner.nextLine();
+        System.out.print("Membership Description: ");
+        String membershipDescription = scanner.nextLine();
+        scanner.nextLine(); 
+        System.out.print("Membership cost: ");
+        double membershipcost = scanner.nextDouble();
+        scanner.nextLine(); 
+
+        MemberShip membership = new MemberShip(0, membershipType, membershipDescription, membershipcost, member.getId());
+        
+        membershipService.purchasemembership(membership);
+        System.out.println("Membership purchased successfully!");
+
     }
 
-
+    
+        
 
     }
             

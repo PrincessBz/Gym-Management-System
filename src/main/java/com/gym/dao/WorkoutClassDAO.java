@@ -13,7 +13,7 @@ public class WorkoutClassDAO {
 
     @SuppressWarnings("CallToPrintStackTrace")
     public void addClass(WorkoutClass workoutClass) throws SQLException {
-       String query = "INSERT INTO workout_classes (workoutClasstype, workoutClassDescription, trainerId) VALUES (?, ?, ?)";
+       String query = "INSERT INTO workoutClasses (workoutClasstype, workoutClassDescription, trainerId) VALUES (?, ?, ?)";
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, workoutClass.getWorkoutClassType());
@@ -30,7 +30,7 @@ public class WorkoutClassDAO {
 
     @SuppressWarnings("CallToPrintStackTrace")
     public void updateClass(WorkoutClass workoutClass) throws SQLException {
-        String query = "UPDATE workout_classes SET workoutClasstype = ?, workoutClassDescription = ?, trainerId = ? WHERE workoutClassId = ?";
+        String query = "UPDATE workoutClasses SET workoutClasstype = ?, workoutClassDescription = ?, trainerId = ? WHERE workoutClassId = ?";
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, workoutClass.getWorkoutClassType());
@@ -48,7 +48,7 @@ public class WorkoutClassDAO {
 
     @SuppressWarnings("CallToPrintStackTrace")
     public void deleteClass(int workoutClassId) throws SQLException {
-        String query = "DELETE FROM workout_classes WHERE workoutClassId = ?";
+        String query = "DELETE FROM workoutClasses WHERE workoutClassId = ?";
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, workoutClassId);
@@ -64,7 +64,7 @@ public class WorkoutClassDAO {
     @SuppressWarnings("CallToPrintStackTrace")
     public List<WorkoutClass> getAllClasses() throws SQLException {
         List<WorkoutClass> workoutClasses = new ArrayList<>();
-        String query = "SELECT * FROM workout_classes";
+        String query = "SELECT * FROM workoutClasses";
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query);
              ResultSet resultSet = statement.executeQuery()) {
@@ -87,7 +87,7 @@ public class WorkoutClassDAO {
     @SuppressWarnings("CallToPrintStackTrace")
     public List<WorkoutClass> getClassesByTrainerId(int trainerId) throws SQLException {
         List<WorkoutClass> trainerClasses = new ArrayList<>();
-        String query = "SELECT * FROM workout_classes WHERE trainerId = ?";
+        String query = "SELECT * FROM workoutClasses WHERE trainerId = ?";
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setInt(1, trainerId);
