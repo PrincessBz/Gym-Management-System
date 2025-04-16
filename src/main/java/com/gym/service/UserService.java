@@ -23,43 +23,26 @@ public class UserService {
 public User login(String email, String password) {
         User user = userDAO.getUserByEmail(email);
 
-        System.out.println("User email: " + email); // Debugging
+        System.out.println("User email: " + email); 
 
         if (user != null) {
-         System.out.println("User found in database: " + user); // Debugging
+         System.out.println("User found in database: " + user); 
     
-            System.out.println("Hashed password from database: " + user.getPassword()); // Debugging
+            System.out.println("Hashed password from database: " + user.getPassword());
         }
 
         if (user != null && BCrypt.checkpw(password, user.getPassword())) {
-            System.out.println("Password matches!"); // Debugging
+            System.out.println("Password matches!"); 
             return user;
     } else {
-        System.out.println("Password does not match."); // Debugging
-        System.out.println("Entered password: " + password); // Debugging
+        System.out.println("Password does not match."); 
+        System.out.println("Entered password: " + password); 
     }
-    System.out.println("User not found with email: " + email); // Debugging
+    System.out.println("User not found with email: " + email);
     System.out.println("Invalid email or password");
 
     return null;
     }
-
-
-
-
-
-
-
-
-
-    //     BCrypt.checkpw(password, user.getPassword())) {
-    //         return user;
-    //     }
-    // else {
-    //     System.out.println("Invalid email or password");
-    // }
-    //     return null;
-    // }
 
     public List<User> getAllUsers() {
         return userDAO.getAllUsers();

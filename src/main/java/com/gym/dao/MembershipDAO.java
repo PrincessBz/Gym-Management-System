@@ -14,7 +14,7 @@ public class MembershipDAO {
 
     @SuppressWarnings("CallToPrintStackTrace")
     public void addMembership(MemberShip membership) {
-       String query = " INSERT INTO Membership (membershipid, membershiptype, membershipdescription, membershipcost) VALUES (?, ?, ?, ?)";
+       String query = " INSERT INTO Membership (membershipid, membershiptype, membershipdescription, membershipcost, memberid) VALUES (?, ?, ?, ?, ?)";
 
 
        try(Connection connection = DatabaseConnection.getConnection();
@@ -23,6 +23,7 @@ public class MembershipDAO {
            preparedStatement.setString(2, membership.getMembershipType());
            preparedStatement.setString(3, membership.getMembershipDescription());
            preparedStatement.setDouble(4, membership.getMembershipcost());
+           preparedStatement.setInt(5, membership.getMemberId());
            preparedStatement.executeUpdate();
        } catch (SQLException e) {
            e.printStackTrace();

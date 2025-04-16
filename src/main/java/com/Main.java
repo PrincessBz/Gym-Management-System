@@ -1,5 +1,6 @@
 package com;
     import java.sql.SQLException;
+    import java.util.List;
     import java.util.Scanner;
 
     import com.gym.service.MembershipService;
@@ -24,7 +25,6 @@ package com;
             System.out.println("3. Exit");
 
             String choice = scanner.nextLine();
-            scanner.nextLine();
 
             switch (Integer.parseInt(choice)) {
                 case 1:
@@ -111,7 +111,7 @@ package com;
 
         private static void AdminMenu(User Admin) {
             while(true){
-            System.out.println("\n(U+1F464) Admin Menu:");
+            System.out.println("\n Admin Menu:");
             System.out.println("1. Get all users");
             System.out.println("2. Delete user");
             System.out.println("3. View all Memberships and Revenue");
@@ -122,7 +122,18 @@ package com;
 
             switch (choice) {
                 case "1":
-                    userService.getAllUsers();
+                    List<User> users = userService.getAllUsers();
+                    if (users.isEmpty()) {
+                   System.out.println("No users found.");
+                } else {
+                   System.out.println("=== Registered Users ===");
+                   for (User user : users) {
+                   System.out.println(user);
+               }  
+
+        }
+
+
                     break;
                 case "2":
                     System.out.print("Enter the ID of the user to delete: ");
@@ -147,7 +158,7 @@ package com;
 
         private static void TrainerMenu(User trainer) throws SQLException {
         while (true) {
-            System.out.println("\n(U+1F4AA) Trainer Menu:");
+            System.out.println("\n Trainer Menu:");
             System.out.println("1. Add Workout Class");
             System.out.println("2. Update Workout Class");
             System.out.println("3. Delete Workout Class");
@@ -225,7 +236,7 @@ package com;
 
         public static void MemberMenu(User member) throws SQLException {
         while (true) {
-            System.out.println("\n(U+1F3CB) Member Menu:");
+            System.out.println("\n Member Menu:");
             System.out.println("1. View Workout Classes");
             System.out.println("2. Purchase Membership");
             System.out.println("3. Logout");
@@ -255,15 +266,14 @@ package com;
         String membershipType = scanner.nextLine();
         System.out.print("Membership Description: ");
         String membershipDescription = scanner.nextLine();
-        scanner.nextLine(); 
         System.out.print("Membership cost: ");
         double membershipcost = scanner.nextDouble();
         scanner.nextLine(); 
 
         MemberShip membership = new MemberShip(0, membershipType, membershipDescription, membershipcost, member.getId());
         
-        membershipService.purchasemembership(membership);
-        System.out.println("Membership purchased successfully!");
+        membershipService.purchasemembership(membership, member.getId());
+        
 
     }
 

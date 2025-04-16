@@ -9,8 +9,9 @@ import com.gym.user.MemberShip;
 public class MembershipService {
     private final MembershipDAO membershipDAO = new MembershipDAO();
 
-    public void purchasemembership(MemberShip membership) {
-        membershipDAO.addMembership(membership);
+    public void purchasemembership(MemberShip membership, int memberId) throws SQLException {
+              membership.setMemberId(memberId);
+               membershipDAO.addMembership(membership);
         System.out.println("Membership purchased successfully!");
         }
 
